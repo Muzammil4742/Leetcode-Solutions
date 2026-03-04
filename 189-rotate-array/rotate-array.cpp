@@ -7,7 +7,10 @@ public:
         vector<int> temp(n);
 
         for(int i = 0; i < n; i++) {
-            temp[(i + k) % n] = nums[i];
+            if(i < k)
+                temp[i] = nums[n - k + i];
+            else
+                temp[i] = nums[i - k];
         }
 
         nums = temp;
