@@ -8,28 +8,26 @@ public:
             nums[i] = nums[i] * nums[i];
         }
 
-        // Step 2: two-end swapping logic
+        // Step 2: two-end swapping until fully sorted
         bool swapped;
         do {
             swapped = false;
+            int k = 0;
+            int j = n - 1;
 
-            // left to right
-            for(int k = 0; k < n - 1; k++) {
+            for(int i = 0; i < n / 2; i++) {
                 if(nums[k] > nums[k + 1]) {
                     swap(nums[k], nums[k + 1]);
                     swapped = true;
                 }
-            }
-
-            // right to left
-            for(int j = n - 1; j > 0; j--) {
                 if(nums[j] < nums[j - 1]) {
                     swap(nums[j], nums[j - 1]);
                     swapped = true;
                 }
+                k++;
+                j--;
             }
-
-        } while(swapped);  // repeat until fully sorted
+        } while(swapped);  // repeat until no swaps happen
 
         return nums;
     }
