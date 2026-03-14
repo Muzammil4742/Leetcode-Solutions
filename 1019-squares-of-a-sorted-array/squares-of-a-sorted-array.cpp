@@ -1,14 +1,10 @@
 class Solution {
 public:
     vector<int> sortedSquares(vector<int>& nums) {
-        int n = nums.size();
-
-        // Step 1: square all elements
+        int n = nums.size();      
         for(int i = 0; i < n; i++) {
             nums[i] = nums[i] * nums[i];
         }
-
-        // Step 2: two-end swapping until fully sorted
         bool swapped;
         do {
             swapped = false;
@@ -27,7 +23,7 @@ public:
                 k++;
                 j--;
             }
-        } while(swapped);  // repeat until no swaps happen
+        } while(swapped);
 
         return nums;
     }
