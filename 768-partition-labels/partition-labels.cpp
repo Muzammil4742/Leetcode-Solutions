@@ -2,27 +2,22 @@ class Solution {
 public:
     vector<int> partitionLabels(string s) {
         vector<int> last(26);
-        
-        // store last positions
-        for (int i = 0; i < s.size(); i++) {
+        for(int i=0 ; i<s.size(); i++)
+        {
             last[s[i] - 'a'] = i;
         }
-
+        int size= 0 ; 
+        int end= 0 ;
         vector<int> ans;
-        int size = 0;   // current partition size
-        int end = 0;    // farthest boundary
-
-        for (int i = 0; i < s.size(); i++) {
-            size++;  // keep adding characters
-            
-            end = max(end, last[s[i] - 'a']);
-            
-            if (i == end) {   // partition ends here
+        for(int i=0 ; i<s.size() ; i++)
+        {
+            size++;
+            end= max(end, last[s[i] - 'a']);
+             if (i == end) {  
                 ans.push_back(size);
-                size = 0;     // reset for next partition
+                size = 0;    
             }
         }
-
         return ans;
     }
 };
