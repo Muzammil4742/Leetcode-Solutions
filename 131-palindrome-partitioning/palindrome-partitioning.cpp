@@ -1,39 +1,38 @@
 class Solution {
 public:
+    bool isPalindrome(string subString)
+    {
+        string rev = subString;
+         reverse(rev.begin(), rev.end());
+        return subString == rev;
+    }
+
+
+    void getAllPartions(string s,vector<vector<string>> &ans,vector<string> &combination)
+    {
+        if(s.size() == 0)
+        {
+            ans.push_back(combination);
+        }
+        for(int i=0 ; i<s.size() ; i++)
+        {
+            string subString = s.substr(0 , i+1);
+            if(isPalindrome(subString))
+            {
+                combination.push_back(subString);
+                getAllPartions(s.substr(i+1),ans,combination);
+                combination.pop_back();
+
+            }
+        }
+
+    }
+
     vector<vector<string>> partition(string s) {
-        vector<vector<string>> result;
-        vector<string> path;
-        backtrack(s, 0, path, result);
-        return result;
+        vector<vector<string>> ans;
+        vector<string> combination;
+        getAllPartions(s,ans,combination);
+        return ans;
     }
 
-private:
-    void backtrack(const string& s, int start, vector<string>& path, vector<vector<string>>& result) {
-        // If we've reached the end of the string, add the current partition to the result list
-        if (start == s.length()) {
-            result.push_back(path);
-            return;
-        }
-        // Explore all possible partitions
-        for (int end = start + 1; end <= s.length(); ++end) {
-            // If the current substring is a palindrome, add it to the current path
-            if (isPalindrome(s, start, end - 1)) {
-                path.push_back(s.substr(start, end - start));
-                // Recur to find other partitions
-                backtrack(s, end, path, result);
-                // Backtrack to explore other partitions
-                path.pop_back();
-            }
-        }
-    }
-
-    bool isPalindrome(const string& s, int left, int right) {
-        // Check if the substring s[left:right+1] is a palindrome
-        while (left < right) {
-            if (s[left++] != s[right--]) {
-                return false;
-            }
-        }
-        return true;
-    }
 };
