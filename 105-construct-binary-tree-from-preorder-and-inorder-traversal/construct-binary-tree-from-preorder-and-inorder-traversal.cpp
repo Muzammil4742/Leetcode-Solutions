@@ -1,8 +1,5 @@
-
-
 class Solution {
 public:
-
 int search(vector<int>& inorder , int left , int right , int val)
 {
     for(int i = left ; i <= right ; i++)
