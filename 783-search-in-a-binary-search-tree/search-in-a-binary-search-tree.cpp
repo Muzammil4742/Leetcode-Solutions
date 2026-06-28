@@ -11,14 +11,14 @@ public:
         {
             return root;
         }
-
-        TreeNode* left = searchVal(root->left, val);
-        if(left != NULL)
+        else if(val < root->val)
         {
-            return left;
+            return searchVal(root->left, val);
         }
-
-        return searchVal(root->right, val);
+        else
+        {
+            return searchVal(root->right, val);
+        }
     }
 
     TreeNode* searchBST(TreeNode* root, int val)
